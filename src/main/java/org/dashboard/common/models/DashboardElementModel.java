@@ -1,0 +1,45 @@
+package org.dashboard.common.models;
+
+import java.io.Serializable;
+import java.util.HashMap;
+
+public abstract class DashboardElementModel implements Serializable {
+    public enum Type {
+        BUTTON("Button"),
+        CLOCK("Clock");
+
+        public final String name;
+        private Type(String name) {
+            this.name = name;
+        }
+    }
+
+    private HashMap<String, String> properties;
+    private Type type;
+    private transient DashboardModel dashboardModel;
+
+    public DashboardElementModel(Type type, HashMap<String, String> elementProperties) {
+        this.properties = elementProperties;
+        this.type = type;
+    }
+
+    public void updateProperty(String key, String value) {
+        this.properties.put(key, value);
+    }
+
+    public String getName() {
+        return this.type.name + " Element";
+    }
+
+    public Type getType() {
+        return this.type;
+    }
+
+    public HashMap<String, String> getProperties() {
+        return this.properties;
+    }
+
+    public void setDashboardModel(DashboardModel dashboardModel) {
+        this.dashboardModel = dashboardModel;
+    }
+}
