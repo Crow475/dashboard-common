@@ -1,6 +1,7 @@
 package org.dashboard.common;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Pair<K, V> implements Serializable {
     private K key;
@@ -21,25 +22,20 @@ public class Pair<K, V> implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
+        if (obj instanceof Pair) {
+            Pair<?, ?> pair = (Pair<?, ?>) obj;
+            return this.key.equals(pair.getKey()) && this.value.equals(pair.getValue());
         }
-
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-
-        Pair<?, ?> pair = (Pair<?, ?>) obj;
-
-        if (key != null ? !key.equals(pair.key) : pair.key != null) {
-            return false;
-        }
-
-        return value != null ? value.equals(pair.value) : pair.value == null;
+        return false;
     }
 
     @Override
     public String toString() {
         return key + "=" + value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(key, value);
     }
 }

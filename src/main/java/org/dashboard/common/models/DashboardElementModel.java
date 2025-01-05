@@ -16,7 +16,6 @@ public abstract class DashboardElementModel implements Serializable {
 
     private HashMap<String, String> properties;
     private Type type;
-    private transient DashboardModel dashboardModel;
 
     public DashboardElementModel(Type type, HashMap<String, String> elementProperties) {
         this.properties = elementProperties;
@@ -37,9 +36,5 @@ public abstract class DashboardElementModel implements Serializable {
 
     public HashMap<String, String> getProperties() {
         return this.properties;
-    }
-
-    public void setDashboardModel(DashboardModel dashboardModel) {
-        this.dashboardModel = dashboardModel;
     }
 }
