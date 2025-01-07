@@ -1,5 +1,6 @@
 package org.dashboard.common;
 
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -13,7 +14,7 @@ public class Passwords {
     private static final int ITERATIONS = 65536;
     private static final int KEY_LENGTH = 256;
 
-    public static class  Password {
+    public static class  Password implements Serializable {
         private final byte[] salt;
         private final byte[] hash;
 
