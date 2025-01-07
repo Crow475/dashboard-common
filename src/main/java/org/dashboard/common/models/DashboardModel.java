@@ -5,11 +5,23 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.KeyDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import org.dashboard.common.Pair;
 
 public class DashboardModel implements Serializable {
+    public static class pairKeyDeserializer extends KeyDeserializer {
+    @Override
+    public Object deserializeKey(final String key, final DeserializationContext ctxt) throws java.io.IOException, JsonProcessingException {
+        String[] parts = key.split("=");
+        return new Pair<Integer, Integer>(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+    }
+    }
+    
     private byte[] id = new byte[16];
     private byte[] ownerId = new byte[16];
     private Date createdAt;
@@ -154,6 +166,10 @@ public class DashboardModel implements Serializable {
 
     public void updatePropertiesFromJSON() {
         ObjectMapper objectMapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addKeyDeserializer(Pair.class, new pairKeyDeserializer());
+        objectMapper.registerModule(module);
+        
         try {
             this.properties = objectMapper.readValue(this.JSONProperties, Properties.class);
         } catch (Exception e) {
