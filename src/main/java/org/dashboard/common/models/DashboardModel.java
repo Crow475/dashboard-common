@@ -169,7 +169,7 @@ public class DashboardModel implements Serializable {
         SimpleModule module = new SimpleModule();
         module.addKeyDeserializer(Pair.class, new pairKeyDeserializer());
         objectMapper.registerModule(module);
-        
+
         try {
             this.properties = objectMapper.readValue(this.JSONProperties, Properties.class);
         } catch (Exception e) {
@@ -183,5 +183,9 @@ public class DashboardModel implements Serializable {
 
     public void setJSONProperties(String JSONProperties) {
         this.JSONProperties = JSONProperties;
+    }
+
+    public void clearProperties() {
+        this.properties = null;
     }
 }
