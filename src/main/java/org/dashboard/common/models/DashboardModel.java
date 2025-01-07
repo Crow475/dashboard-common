@@ -17,6 +17,7 @@ public class DashboardModel implements Serializable {
     private String name;
 
     private Properties properties;
+    private String JSONProperties;
 
     public static class Properties implements Serializable {
         private int sizeX;
@@ -103,6 +104,16 @@ public class DashboardModel implements Serializable {
         this.updatedAt = updatedAt;
         this.name = name;
         this.properties = properties;
+        this.JSONProperties = properties.toJSONString();
+    }
+
+    public DashboardModel(byte[] id, byte[] ownerId, Date createdAt, Date updatedAt, String name, String JSONProperties) {
+        this.id = id;
+        this.ownerId = ownerId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.name = name;
+        this.JSONProperties = JSONProperties;
     }
 
     public byte[] getId() {
@@ -135,5 +146,26 @@ public class DashboardModel implements Serializable {
 
     public void setOwnerId(byte[] ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public void updateJSONProperties() {
+        this.JSONProperties = this.properties.toJSONString();
+    }
+
+    public void updatePropertiesFromJSON() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            this.properties = objectMapper.readValue(this.JSONProperties, Properties.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getJSONProperties() {
+        return this.JSONProperties;
+    }
+
+    public void setJSONProperties(String JSONProperties) {
+        this.JSONProperties = JSONProperties;
     }
 }
