@@ -1,8 +1,10 @@
 package org.dashboard.common.models;
 
+import java.io.Serializable;
+
 import org.dashboard.common.Role;
 
-public class UserOfDashboard {
+public class UserOfDashboard implements Serializable {
     private String username;
     private String dashboardName;
     private Role role;
