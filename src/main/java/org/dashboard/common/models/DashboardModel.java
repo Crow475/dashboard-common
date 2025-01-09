@@ -31,6 +31,8 @@ public class DashboardModel implements Serializable {
     private Properties properties;
     private String JSONProperties;
 
+    private String ownerUsername;
+
     public static class Properties implements Serializable {
         private int sizeX;
         private int sizeY;
@@ -152,12 +154,25 @@ public class DashboardModel implements Serializable {
         return this.properties;
     }
 
+    public String getOwnerUsername() {
+        return this.ownerUsername;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
     public void setOwnerId(byte[] ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public void setOwnerUsername(String ownerUsername) {
+        this.ownerUsername = ownerUsername;
+    }
+
+    public void updateOwner(byte[] ownerId, String ownerUsername) {
+        this.ownerId = ownerId;
+        this.ownerUsername = ownerUsername;
     }
 
     public void updateJSONProperties() {
