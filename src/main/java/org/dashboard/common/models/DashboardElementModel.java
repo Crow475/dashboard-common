@@ -9,7 +9,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public abstract class DashboardElementModel implements Serializable {
     public enum Type {
         BUTTON("Button"),
-        CLOCK("Clock");
+        CLOCK("Clock"),
+        ANNOUNCEMENT("Announcement"),
+        TASKS("Tasks"),
+        NOTES("Notes"),
+        LINKS("Links"),
+        EMBED("Embed");
 
         public final String name;
         private Type(String name) {
