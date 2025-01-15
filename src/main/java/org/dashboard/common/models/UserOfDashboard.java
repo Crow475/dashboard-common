@@ -4,12 +4,16 @@ import java.io.Serializable;
 
 import org.dashboard.common.Role;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserOfDashboard implements Serializable {
     private String username;
     private String dashboardName;
     private Role role;
 
-    public UserOfDashboard(String username, String dashboardName, Role role) {
+    @JsonCreator
+    public UserOfDashboard(@JsonProperty("username") String username, @JsonProperty("dashboardName") String dashboardName, @JsonProperty("role") Role role) {
         this.username = username;
         this.dashboardName = dashboardName;
         this.role = role;
