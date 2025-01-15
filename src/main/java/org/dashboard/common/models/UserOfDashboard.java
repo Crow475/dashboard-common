@@ -38,4 +38,22 @@ public class UserOfDashboard implements Serializable {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof UserOfDashboard) {
+            UserOfDashboard other = (UserOfDashboard) obj;
+            return this.username.equals(other.username) && this.dashboardName.equals(other.dashboardName);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return this.username.hashCode() + this.dashboardName.hashCode();
+    }
 }
